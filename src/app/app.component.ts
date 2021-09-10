@@ -8,6 +8,7 @@ import { Component, NgZone } from '@angular/core';
 export class AppComponent {
   title = 'change-detection';
   _time: any = null;
+  text= 'Original text in parent component'
 
   constructor(zone: NgZone){
     this._time = Date.now();
