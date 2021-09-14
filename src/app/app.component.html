@@ -1,9 +1,13 @@
-<!-- <h3>
+<h3>
   Change detection is triggered at:
   <span [textContent]="time | date: 'hh:mm:ss:SSS'"></span>
 </h3>
-<button (click)="0">Trigger change detection</button> -->
+<button (click)="0">Trigger change detection</button>
 
 <!-- Explore the order of execution -->
 <div [textContent]="text"></div>
 <app-child-comp></app-child-comp>
+
+<input type="text">
+
+<h1>{{changed}}</h1>

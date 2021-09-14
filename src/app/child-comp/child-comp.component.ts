@@ -15,7 +15,7 @@ export class ChildCompComponent implements OnInit {
 
   ngAfterViewChecked(): void {
     // Cause ExpressionChanged error, because change detection had already been ran in the parent component
-    // But we are updating the parent's component property 'text'
+    // But we are updating the parent's component property 'text' used in the binding
     this.parent.text = 'Updated text in parent component';
   }
 

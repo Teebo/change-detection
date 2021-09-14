@@ -1,4 +1,4 @@
-import { Component, NgZone } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,11 +6,15 @@ import { Component, NgZone } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  changed= false;
   title = 'change-detection';
   _time: any = null;
   text= 'Original text in parent component'
 
-  constructor(zone: NgZone){
+  constructor(
+    zone: NgZone,
+    public cd: ChangeDetectorRef
+    ){
     this._time = Date.now();
 
   //  setInterval( // PROBLEM: Runs change detection all the time (miLlisecond change)
@@ -21,6 +25,7 @@ export class AppComponent {
     //     this._time = Date.now();
     //   }
     // );
+
 
     zone.runOutsideAngular(// Running the setIntervalout side the Angular zone so that
       // the next time change detection happens the value of the getter time will be the synced/uptodate
@@ -39,6 +44,23 @@ export class AppComponent {
         );
       }
     )
+
+
+
+    // indepth example
+
+    setTimeout(() => {
+      this.cd.detach();
+      this.changed = true;
+    }, 2000);
+
+
+    setTimeout(() => {
+      this.cd.reattach();
+      this.changed = true;
+
+
+    }, 8000);
   }
 
   get time() {
